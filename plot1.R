@@ -1,0 +1,10 @@
+library(dplyr)
+house1 <- read.csv2("household_power_consumption.txt", na.strings = "?")
+house1$Date <- as.Date(house1$Date, format = '%d/%m/%Y')
+house <- filter(house1,   Date == "2007-02-01"| Date == "2007-02-02")
+house$Global_active_power<-unlist(lapply(house$Global_active_power, as.numeric)
+                                  , use.names = TRUE)
+png("plot1.png", width = 480, height = 480)
+hist(house$Global_active_power, col="red", main = "Global Active Power", xlab = "Global Active power (kilowatts)", ylab = "Frequency" )
+dev.off()
+
